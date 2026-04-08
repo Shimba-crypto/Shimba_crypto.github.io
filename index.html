@@ -3,136 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameVault | 30 Top PC & APK Games</title>
+    <title>ShimbaGames | Premium Game Directory</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
     <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .navbar { background-color: #1e293b; border-bottom: 2px solid #3b82f6; }
-        .card { background-color: #1e293b; border: 1px solid #334155; transition: all 0.3s ease; color: white; height: 100%; }
-        .card:hover { transform: translateY(-10px); border-color: #3b82f6; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-        .badge-pc { background-color: #3b82f6; padding: 5px 10px; }
-        .badge-apk { background-color: #10b981; padding: 5px 10px; }
-        .btn-download { border: none; font-weight: bold; }
-        .section-title { border-left: 5px solid #3b82f6; padding-left: 15px; margin-bottom: 30px; }
-        .apk-title { border-color: #10b981; }
-        footer { background-color: #020617; padding: 40px 0; margin-top: 50px; }
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-color: #f8fafc;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --text-color: #1e293b;
+            --glass-border: rgba(0, 0, 0, 0.1);
+        }
+
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        /* Theme Toggle Switch */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 50px;
+        }
+        .theme-switch input { display: none; }
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            background-color: white;
+            bottom: 4px;
+            content: "";
+            height: 16px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 16px;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent-blue); }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        .section-title { font-weight: 800; letter-spacing: -1px; }
+        .btn-download { border-radius: 10px; padding: 10px; font-weight: 600; transition: 0.3s; }
     </style>
 </head>
-<body>
+<body data-theme="dark">
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top p-3 glass-card m-3">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">🎮 GAMEVAULT</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand fw-bold fs-4" href="#">🎮 SHIMBA<span class="text-primary">GAMES</span></a>
+            <div class="d-flex align-items-center">
+                <div class="theme-switch-wrapper me-3">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider"></div>
+                    </label>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#pc-section">PC Games</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#apk-section">Android APKs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pc">PC Section</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#apk">APK Section</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header class="py-5 text-center">
-        <div class="container">
-            <h1 class="display-3 fw-bold">The 2026 Game Directory</h1>
-            <p class="lead text-info">Instant access to 30 of the world's most popular games.</p>
-        </div>
-    </header>
+    <div class="container text-center py-5 animate__animated animate__fadeIn">
+        <h1 class="display-3 fw-bold">Next-Gen Gaming Hub</h1>
+        <p class="opacity-75">30 Verified Titles for Windows & Android</p>
+    </div>
 
-    <main class="container" id="pc-section">
-        <h2 class="section-title">PC Games (Windows)</h2>
-        <div class="row g-4 mb-5">
-            <script>
-                const pcGames = [
-                    {n: "Roblox", g: "Sandbox", l: "https://apps.microsoft.com/store/detail/roblox/9NBLGGH2JHXJ"},
-                    {n: "Minecraft", g: "Survival", l: "https://www.minecraft.net/download"},
-                    {n: "Asphalt Legends Unite", g: "Racing", l: "https://store.steampowered.com/app/2120320/"},
-                    {n: "eFootball 2026", g: "Sports", l: "https://www.konami.com/efootball/"},
-                    {n: "Halo Infinite", g: "FPS", l: "https://store.steampowered.com/app/1240440/"},
-                    {n: "The Sims 4", g: "Life Sim", l: "https://www.ea.com/games/the-sims/the-sims-4"},
-                    {n: "Apex Legends", g: "Battle Royale", l: "https://store.steampowered.com/app/1172470/"},
-                    {n: "Genshin Impact", g: "RPG", l: "https://genshin.hoyoverse.com/"},
-                    {n: "War Thunder", g: "Combat", l: "https://warthunder.com/"},
-                    {n: "Rocket League", g: "Sports", l: "https://www.epicgames.com/store/p/rocket-league"},
-                    {n: "Valorant", g: "Shooter", l: "https://playvalorant.com/"},
-                    {n: "Destiny 2", g: "Looter Shooter", l: "https://store.steampowered.com/app/1085660/"},
-                    {n: "Standoff 2", g: "FPS", l: "https://en.uptodown.com/windows/standoff-2"},
-                    {n: "Candy Crush Saga", g: "Puzzle", l: "https://apps.microsoft.com/store/detail/candy-crush-saga/9NBLGGH18846"},
-                    {n: "Hill Climb Racing", g: "Arcade", l: "https://apps.microsoft.com/store/detail/hill-climb-racing/9WZDNCRFJBBD"}
-                ];
-
-                pcGames.forEach(game => {
-                    document.write(`
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card p-3">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="badge badge-pc text-uppercase">PC</span>
-                                    <small class="text-info">${game.g}</small>
-                                </div>
-                                <h4 class="h5">${game.n}</h4>
-                                <p class="small text-secondary">Verified official download for Windows PC.</p>
-                                <a href="${game.l}" target="_blank" class="btn btn-primary btn-download mt-auto">Download Game</a>
-                            </div>
-                        </div>
-                    `);
-                });
-            </script>
-        </div>
-
-        <h2 class="section-title apk-title" id="apk-section">Android APK & Mobile</h2>
-        <div class="row g-4">
-            <script>
-                const apkGames = [
-                    {n: "Free Fire", g: "Battle Royale", l: "https://play.google.com/store/apps/details?id=com.dts.freefireth"},
-                    {n: "PUBG Mobile", g: "Battle Royale", l: "https://www.pubgmobile.com/"},
-                    {n: "Block Blast!", g: "Puzzle", l: "https://play.google.com/store/apps/details?id=com.mortalsoft.blockblast"},
-                    {n: "Subway Surfers", g: "Runner", l: "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf"},
-                    {n: "Honor of Kings", g: "MOBA", l: "https://www.honorofkings.com/"},
-                    {n: "Call of Duty: Mobile", g: "FPS", l: "https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter"},
-                    {n: "Mobile Legends", g: "MOBA", l: "https://play.google.com/store/apps/details?id=com.mobile.legends"},
-                    {n: "Among Us", g: "Social", l: "https://play.google.com/store/apps/details?id=com.innersloth.spacemafia"},
-                    {n: "Clash of Clans", g: "Strategy", l: "https://play.google.com/store/apps/details?id=com.supercell.clashofclans"},
-                    {n: "8 Ball Pool", g: "Sports", l: "https://play.google.com/store/apps/details?id=com.miniclip.eightballpool"},
-                    {n: "Brawl Stars", g: "Action", l: "https://play.google.com/store/apps/details?id=com.supercell.brawlstars"},
-                    {n: "Speed Drifters", g: "Racing", l: "https://dl.garena.com/"},
-                    {n: "Gardenscapes", g: "Puzzle", l: "https://play.google.com/store/apps/details?id=com.playrix.gardenscapes"},
-                    {n: "Pokemon GO", g: "AR", l: "https://play.google.com/store/apps/details?id=com.nianticlabs.pokemongo"},
-                    {n: "Angry Birds 2", g: "Physics", l: "https://play.google.com/store/apps/details?id=com.rovio.baba"}
-                ];
-
-                apkGames.forEach(game => {
-                    document.write(`
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card p-3">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="badge badge-apk text-uppercase">APK</span>
-                                    <small class="text-success">${game.g}</small>
-                                </div>
-                                <h4 class="h5">${game.n}</h4>
-                                <p class="small text-secondary">Safe mobile version available on Official Stores.</p>
-                                <a href="${game.l}" target="_blank" class="btn btn-success btn-download mt-auto">Get APK / Install</a>
-                            </div>
-                        </div>
-                    `);
-                });
-            </script>
-        </div>
-    </main>
-
-    <footer class="text-center">
-        <div class="container">
-            <p class="mb-2 fw-bold text-white">GAMEVAULT DIRECTORY</p>
-            <p class="text-secondary small">Always download from official sources to protect your hardware.<br>All links provided point to verified game publishers.</p>
-            <div class="mt-3">
-                <a href="#" class="text-info text-decoration-none mx-2">Privacy Policy</a>
-                <a href="#" class="text-info text-decoration-none mx-2">Terms of Service</a>
+    <div class="container mb-5" id="pc">
+        <h2 class="section-title mb-4 animate__animated animate__slideInLeft">🖥️ PC TITLES</h2>
+        <div class="row g-4" id="pc-container">
             </div>
-        </div>
-    </footer>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="container mb-5" id="apk">
+        <h2 class="section-title mb-4 text-success animate__animated animate__slideInLeft">📱 MOBILE APKs</h2>
+        <div class="row g-4" id="apk-container">
+            </div>
+    </div>
+
+    <script>
+        // Game Data arrays
+        const pcGames = [
+            {n: "Roblox", g: "Sandbox", l: "https://apps.microsoft.com/store/detail/roblox/9NBLGGH2JHXJ"},
+            {n: "Minecraft", g: "Survival", l: "https://www.minecraft.net/download"},
+            {n: "Asphalt Legends", g: "Racing", l: "https://store.steampowered.com/app/2120320/"},
+            {n: "eFootball 2026", g: "Sports", l: "https://www.konami.com/efootball/"},
+            {n: "Halo Infinite", g: "FPS", l: "https://store.steampowered.com/app/1240440/"},
+            {n: "The Sims 4", g: "Life Sim", l: "https://www.ea.com/games/the-sims/the-sims-4"},
+            {n: "Apex Legends", g: "Battle Royale", l: "https://store.steampowered.com/app/1172470/"},
+            {n: "Genshin Impact", g: "RPG", l: "https://genshin.hoyoverse.com/"},
+            {n: "War Thunder", g: "Combat", l: "https://warthunder.com/"},
+            {n: "Rocket League", g: "Sports", l: "https://www.epicgames.com/store/p/rocket-league"},
+            {n: "Valorant", g: "Shooter", l: "https://playvalorant.com/"},
+            {n: "Destiny 2", g: "Looter", l: "https://store.steampowered.com/app/1085660/"},
+            {n: "Standoff 2", g: "FPS", l: "https://en.uptodown.com/windows/standoff-2"},
+            {n: "Candy Crush", g: "Puzzle", l: "https://apps.microsoft.com/store/detail/candy-crush-saga/9NBLGGH18846"},
+            {n: "Hill Climb", g: "Arcade", l: "https://apps.microsoft.com/store/detail/hill-climb-racing/9WZDNCRFJBBD"}
+        ];
+
+        const apkGames = [
+            {n: "Free Fire", g: "Battle Royale", l: "https://play.google.com/store/apps/details?id=com.dts.freefireth"},
+            {n: "PUBG Mobile", g: "Battle Royale", l: "https://www.pubgmobile.com/"},
+            {n: "Block Blast!", g: "Puzzle", l: "https://play.google.com/store/apps/details?id=com.mortalsoft.blockblast"},
+            {n: "Subway Surfers", g: "Runner", l: "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf"},
+            {n: "Honor of Kings", g: "MOBA", l: "https://www.honorofkings.com/"},
+            {n: "Call of Duty", g: "FPS", l: "https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter"},
+            {n: "Mobile Legends", g: "MOBA", l: "https://play.google.com/store/apps/details?id=com.mobile.legends"},
+            {n: "Among Us", g: "Social", l: "https://play.google.com/store/apps/details?id=com.innersloth.spacemafia"},
+            {n: "Clash of Clans", g: "Strategy", l: "https://play.google.com/store/apps/details?id=com.supercell.clashofclans"},
+            {n: "8 Ball Pool", g: "Sports", l: "https://play.google.com/store/apps/details?id=com.miniclip.eightballpool"},
+            {n: "Brawl Stars", g: "Action", l: "https://play.google.com/store/apps/details?id=com.supercell.brawlstars"},
+            {n: "Speed Drifters", g: "Racing", l: "https://dl.garena.com/"},
+            {n: "Gardenscapes", g: "Puzzle", l: "https://play.google.com/store/apps/details?id=com.playrix.gardenscapes"},
+            {n: "Pokemon GO", g: "AR", l: "https://play.google.com/store/apps/details?id=com.nianticlabs.pokemongo"},
+            {n: "Angry Birds 2", g: "Physics", l: "https://play.google.com/store/apps/details?id=com.rovio.baba"}
+        ];
+
+        // UI Injection
+        function loadGames(list, containerId, btnClass) {
+            const container = document.getElementById(containerId);
+            list.forEach(game => {
+                container.innerHTML += `
+                    <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp">
+                        <div class="glass-card p-4 h-100 d-flex flex-column">
+                            <div class="d-flex justify-content-between mb-3">
+                                <span class="badge rounded-pill bg-secondary bg-opacity-25">${game.g}</span>
+                            </div>
+                            <h3 class="h5 fw-bold mb-3">${game.n}</h3>
+                            <a href="${game.l}" target="_blank" class="btn ${btnClass} btn-download mt-auto">Secure Download</a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        loadGames(pcGames, 'pc-container', 'btn-primary');
+        loadGames(apkGames, 'apk-container', 'btn-success');
+
+        // Dark/Light Logic
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.body.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'light') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        toggleSwitch.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
 </body>
 </html>
